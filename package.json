@@ -1,8 +1,8 @@
 {
   "private": true,
-  "name": "sealed-auction",
+  "name": "auction-app",
   "version": "0.1.0",
-  "description": "Grow some crops on the blockchain.",
+  "description": "Second-price auction on the blockchain.",
   "license": "MIT",
   "author": "Nick Hynes <nhynes@oasislabs.com>",
   "main": "dist/index.js",

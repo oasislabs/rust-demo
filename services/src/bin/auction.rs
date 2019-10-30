@@ -27,7 +27,7 @@ impl SealedAuction {
     pub fn new(
         ctx: &Context,
         item_address: Address,
-        item_transfer_cap: u64,
+        item_transfer_cap: [u8; 16],
         auction_duration: u64,
     ) -> Result<Self, AuctionError> {
         let mut item_client = item::AuctionItemClient::at(item_address);
@@ -86,7 +86,7 @@ impl SealedAuction {
                 item::AuctionItemClient::at(self.item_address)
                     .set_owner(
                         &Context::default(),
-                        0, /* null transfer cap */
+                        [0; 16], /* null transfer cap */
                         self.owner,
                     )
                     .unwrap();

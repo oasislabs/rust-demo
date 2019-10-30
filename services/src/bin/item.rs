@@ -6,7 +6,7 @@ struct AuctionItem {
     owner: Address,
 
     /// A capability that can be used to transfer ownership of this item.
-    transfer_cap: u64,
+    transfer_cap: [u8; 16],
 }
 
 impl AuctionItem {
@@ -19,7 +19,7 @@ impl AuctionItem {
 
     /// Returns the address of the item under consideration.
     /// Only the owner is privy to this information.
-    pub fn transfer_cap(&self, ctx: &Context) -> Option<u64> {
+    pub fn transfer_cap(&self, ctx: &Context) -> Option<[u8; 16]> {
         if ctx.sender() == self.owner {
             Some(self.transfer_cap)
         } else {
@@ -29,7 +29,7 @@ impl AuctionItem {
 
     /// Sets the owner of this item if the sender has the capability to do so.
     /// Returns whether the call succeeded.
-    pub fn set_owner(&mut self, ctx: &Context, transfer_cap: u64, new_owner: Address) -> bool {
+    pub fn set_owner(&mut self, ctx: &Context, transfer_cap: [u8; 16], new_owner: Address) -> bool {
         if ctx.sender() == self.owner || transfer_cap == self.transfer_cap {
             self.transfer_cap = rand::random();
             self.owner = new_owner;

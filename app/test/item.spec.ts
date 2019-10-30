@@ -1,18 +1,34 @@
 import oasis from '@oasislabs/client';
 
-jest.setTimeout(20000);
+jest.setTimeout(15000);
 
-describe('SealedAuction', () => {
+describe('AuctionItem', () => {
     let service: any;
 
     beforeAll(async () => {
-        service = await oasis.workspace.SealedAuction.deploy({
+        service = await oasis.workspace.AuctionItem.deploy({
             header: { confidential: false },
+            gasLimit: '0x700000',
         });
     });
 
-    it('says hello', async () => {
-        expect(await service.sayHello()).toMatch(/^Hello/);
+    it('transfer', async () => {
+        const transferCap = await service.transferCap({
+            gasLimit: '0x60000',
+        });
+        expect(transferCap).not.toBe(null);
+
+        expect(
+            await service.setOwner(transferCap, new Uint8Array(20), {
+                gasLimit: '0x65000',
+            }),
+        ).toBe(true);
+
+        expect(
+            await service.transferCap({
+                gasLimit: '0x40000',
+            }),
+        ).toBe(null);
     });
 
     afterAll(() => {
