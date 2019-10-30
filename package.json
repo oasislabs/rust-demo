@@ -1,0 +1,59 @@
+{
+  "private": true,
+  "name": "sealed-auction",
+  "version": "0.1.0",
+  "description": "Grow some crops on the blockchain.",
+  "license": "MIT",
+  "author": "Nick Hynes <nhynes@oasislabs.com>",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc -b && rollup -c rollup.config.ts",
+    "lint": "eslint 'client/**/*.ts' && prettier -c 'client/**/*.ts'",
+    "lint:fix": "eslint --fix 'client/**/*.ts' && prettier --write 'client/**/*.ts'",
+    "test": "jest"
+  },
+  "eslintIgnore": [
+    "node_modules/"
+  ],
+  "jest": {
+    "moduleFileExtensions": [
+      "js",
+      "ts"
+    ],
+    "transform": {
+      "\\.ts$": "ts-jest"
+    },
+    "testEnvironment": "node",
+    "testRegex": "/test/.*\\.spec\\.ts$",
+    "testPathIgnorePatterns": [
+      "/node_modules/"
+    ]
+  },
+  "prettier": {
+    "semi": true,
+    "singleQuote": true,
+    "tabWidth": 4,
+    "trailingComma": "all"
+  },
+  "dependencies": {
+    "@oasislabs/client": "^1.0.0-rc.26",
+    "@oasislabs/service": "^1.0.0-rc.20"
+  },
+  "devDependencies": {
+    "@types/jest": "^24.0.18",
+    "@types/node": "^12.7.5",
+    "@typescript-eslint/eslint-plugin": "^2.3.3",
+    "@typescript-eslint/parser": "^2.3.3",
+    "eslint": "^6.5.1",
+    "eslint-config-prettier": "^6.4.0",
+    "jest": "^24.9.0",
+    "jest-puppeteer": "^4.3.0",
+    "prettier": "^1.14.3",
+    "rollup": "^1.24.0",
+    "rollup-plugin-typescript": "^1.0.1",
+    "ts-jest": "^24.1.0",
+    "tslib": "^1.10.0",
+    "typescript": "^3.6.3"
+  }
+}

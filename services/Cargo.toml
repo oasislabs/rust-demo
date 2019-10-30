@@ -1,0 +1,12 @@
+[package]
+name = "sealed_auction"
+version = "0.1.0"
+authors = ["Nick Hynes <nhynes@oasislabs.com>"]
+edition = "2018"
+
+[dependencies]
+oasis-std = "0.2"
+serde = { version = "1.0", features = ["derive"] }
+
+[dev-dependencies]
+oasis-test = "0.2"

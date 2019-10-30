@@ -1,0 +1,17 @@
+{
+  "include": ["app/src"],
+  "compilerOptions": {
+    "declaration": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "esModuleInterop": true,
+    "lib": ["es6", "dom"],
+    "module": "umd",
+    "moduleResolution": "node",
+    "noImplicitAny": true,
+    "outDir": "dist/",
+    "sourceMap": true,
+    "strict": true,
+    "target": "es6"
+  }
+}
