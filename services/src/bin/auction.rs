@@ -83,13 +83,7 @@ impl SealedAuction {
         // Otherwise, short circuit, knowing that there's no balance to redistribute.
         if sorted_bids.is_empty() {
             if sender == self.owner {
-                item::AuctionItemClient::at(self.item_address)
-                    .set_owner(
-                        &Context::default(),
-                        [0; 16], /* null transfer cap */
-                        self.owner,
-                    )
-                    .unwrap();
+                self.transfer_item(sender);
             }
             return Ok(false); // no bids, nothing
         }
@@ -113,13 +107,13 @@ impl SealedAuction {
             self.owner.transfer(item_value).unwrap(); // panicking reverts.
         } else if let Some(&bid) = self.bids.get(&sender) {
             if sender_is_winner {
+                self.transfer_item(sender);
                 sender.transfer(bid - item_value).unwrap();
             } else {
                 sender.transfer(bid).unwrap();
             }
         }
 
-        self.payed.insert(sender);
         Ok(sender_is_winner)
     }
 
@@ -127,6 +121,16 @@ impl SealedAuction {
         let mut bids: Vec<(&Address, &Balance)> = self.bids.iter().collect();
         bids.sort_unstable_by_key(|(_, value)| *value);
         bids
+    }
+
+    fn transfer_item(&self, new_owner: Address) {
+        item::AuctionItemClient::at(self.item_address)
+            .set_owner(
+                &Context::default(),
+                [0; 16], /* null transfer cap */
+                new_owner,
+            )
+            .unwrap();
     }
 }
 

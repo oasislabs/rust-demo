@@ -9,8 +9,8 @@
   "types": "dist/index.d.ts",
   "scripts": {
     "build": "tsc -b && rollup -c rollup.config.ts",
-    "lint": "eslint 'client/**/*.ts' && prettier -c 'client/**/*.ts'",
-    "lint:fix": "eslint --fix 'client/**/*.ts' && prettier --write 'client/**/*.ts'",
+    "lint": "eslint 'app/**/*.ts' && prettier -c 'app/**/*.ts'",
+    "lint:fix": "eslint --fix 'app/**/*.ts' && prettier --write 'app/**/*.ts'",
     "test": "jest"
   },
   "eslintIgnore": [
